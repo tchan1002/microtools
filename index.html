@@ -12,29 +12,10 @@
   <style>
     :root{
       --bg:#0b0c10; --card:#111318; --muted:#9aa3ad; --text:#e9eef5; --accent:#7fd1ae; --link:#a7c5ff; --border:#1b1e26;
-      --radius:18px; --shadow:0 8px 20px rgba(0,0,0,.25);
-      --mx:50vw; --my:50vh;             /* orb position (px) */
-      --orb-size:120px; --orb-soft:90px; /* orb tuning */
+      --radius:18px; --shadow:0 6px 16px rgba(0,0,0,.2);
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg)}
-    body{cursor:none}
-
-    /* tangible orb that follows the cursor */
-    .cursor{
-      position:fixed; left:var(--mx); top:var(--my);
-      width:var(--orb-size); height:var(--orb-size);
-      transform:translate(-50%,-50%); border-radius:50%;
-      pointer-events:none; z-index:9999;
-      background:
-        radial-gradient(35% 35% at 40% 35%, #fff, rgba(255,255,255,.65) 45%, transparent 60%),
-        radial-gradient(60% 60% at 50% 60%, rgba(127,209,174,.55), rgba(127,209,174,.0) 70%);
-      filter: blur(10px);
-      mix-blend-mode:screen;
-      box-shadow:
-        0 0 10px rgba(255,255,255,.35),
-        0 0 40px rgba(127,209,174,.25);
-    }
 
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
@@ -47,29 +28,15 @@
     .title p{margin:4px 0 0;color:var(--muted)}
 
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-    .card{
-      position:relative; background:var(--card); border:1px solid var(--border);
-      border-radius:var(--radius); padding:16px; box-shadow:var(--shadow);
-      display:flex; flex-direction:column; gap:10px;
-      opacity:0; transform:translateY(20px); animation:fadeInUp .6s ease forwards;
-      transform-style:preserve-3d; transition:box-shadow .18s ease, transform .18s ease;
-      /* per-card light hotspot; driven by --cx/--cy set in JS */
-    }
-    .card::before{
-      content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
-      background:
-        radial-gradient(180px 180px at var(--cx,50%) var(--cy,50%),
-          rgba(255,255,255,.09), rgba(255,255,255,0) 60%);
-      opacity:var(--lit,0); mix-blend-mode:screen; transition:opacity .18s ease;
-    }
-    .card:nth-child(2){animation-delay:.12s}
-    .card:nth-child(3){animation-delay:.24s}
+    .card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(20px);animation:fadeInUp .6s ease forwards;perspective:800px;transform-style:preserve-3d;transition:box-shadow .2s,transform .2s}
+    .card:nth-child(2){animation-delay:.15s}
+    .card:nth-child(3){animation-delay:.3s}
     .card h3{margin:2px 0 0;font-size:1.05rem}
     .card p{margin:0;color:var(--muted);line-height:1.45}
     .chip{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-size:.8rem}
     .meta{display:flex;gap:10px;align-items:center;margin-top:6px}
     .actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
-    .btn{display:inline-block;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:#141821;color:var(--text);transition:transform .18s}
+    .btn{display:inline-block;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:#141821;color:var(--text);transition:transform .2s}
     .btn:hover{background:#161b25;transform:translateY(-2px)}
 
     footer{margin-top:42px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted)}
@@ -100,9 +67,6 @@
     </footer>
   </div>
 
-  <!-- Orb -->
-  <div class="cursor" aria-hidden="true"></div>
-
   <script>
     const tools = [
       { name:"Morphonyms", tagline:"Word-ladder game about morphological intuition.", url:"https://morphonyms.vercel.app", repo:"https://github.com/tchan1002/morphonyms", status:"Live", note:"Built solo in 2 hours." },
@@ -110,88 +74,16 @@
       { name:"Actionable Insights", tagline:"Paste an md journal entry → get YAML + nudges toward long-term goals.", url:"#", repo:"https://github.com/yourname/actionable-insights", status:"Building", note:"MVP this week." }
     ];
 
-    // Populate grid
-    const grid = document.getElementById('toolGrid');
+    const grid=document.getElementById('toolGrid');
     tools.forEach((t,i)=>{
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.style.animationDelay = `${i*0.12}s`;
-      el.innerHTML = `
-        <div class="meta"><span class="chip">${t.status}</span></div>
-        <h3>${t.name}</h3>
-        <p>${t.tagline}</p>
-        ${t.note ? `<small class="muted" style="color:var(--muted)">${t.note}</small>` : ''}
-        <div class="actions">
-          ${t.url && t.url !== '#' ? `<a class="btn" href="${t.url}" target="_blank" rel="noopener">Open</a>` : ''}
-          ${t.repo ? `<a class="btn" href="${t.repo}" target="_blank" rel="noopener">Repo</a>` : ''}
-        </div>`;
+      const el=document.createElement('article');
+      el.className='card';
+      el.style.animationDelay=`${i*0.15}s`;
+      el.innerHTML=`<div class="meta"><span class="chip">${t.status}</span></div><h3>${t.name}</h3><p>${t.tagline}</p>${t.note?`<small class=\"muted\" style=\"color:var(--muted)\">${t.note}</small>`:''}<div class="actions">${t.url&&t.url!=='#'?`<a class=\"btn\" href=\"${t.url}\" target=\"_blank\" rel=\"noopener\">Open</a>`:''}${t.repo?`<a class=\"btn\" href=\"${t.repo}\" target=\"_blank\" rel=\"noopener\">Repo</a>`:''}</div>`;
       grid.appendChild(el);
     });
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Track orb position (pixels)
-    let mx = window.innerWidth/2, my = window.innerHeight/2;
-    window.addEventListener('mousemove', (e)=>{
-      mx = e.clientX; my = e.clientY;
-      const root = document.documentElement.style;
-      root.setProperty('--mx', mx + 'px');
-      root.setProperty('--my', my + 'px');
-    }, {passive:true});
-
-    // Proximity-based lighting toward the NEAREST card
-    const cards = Array.from(document.querySelectorAll('.card'));
-    const THRESH = 260;          // how close orb must be to affect a card
-    const MAX_TILT = 6;          // degrees (subtle)
-    const BASE_SHADOW = 'var(--shadow)';
-
-    function animate(){
-      let nearest = null, nearestDist = Infinity;
-
-      // 1) find nearest card center to orb
-      for(const c of cards){
-        const r = c.getBoundingClientRect();
-        const cx = r.left + r.width/2;
-        const cy = r.top + r.height/2;
-        const dx = mx - cx, dy = my - cy;
-        const dist = Math.hypot(dx, dy);
-        if(dist < nearestDist){ nearestDist = dist; nearest = {c, r, cx, cy, dx, dy, dist}; }
-      }
-
-      // 2) apply lighting only to the nearest (if within threshold); reset others
-      for(const c of cards){
-        if(!nearest || c !== nearest.c || nearest.dist > THRESH){
-          c.style.transform = 'translateY(0)';     // no tilt
-          c.style.boxShadow = BASE_SHADOW;         // base shadow
-          c.style.setProperty('--lit', 0);         // hide hotspot
-          continue;
-        }
-
-        // Nearest card: compute directional lighting + subtle tilt
-        const { r, dx, dy, dist } = nearest;
-        const strength = Math.max(0, 1 - (dist/THRESH)); // 0..1 falloff
-        const px = (mx - r.left) / r.width;              // 0..1 local coords
-        const py = (my - r.top) / r.height;
-
-        // Tilt *toward* the orb
-        const rx = (0.5 - py) * (MAX_TILT * strength);
-        const ry = (px - 0.5) * (MAX_TILT * 1.2 * strength);
-        c.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-
-        // Direction-aware shadow (cast away from orb)
-        const sx = -ry * 2.0; // subtle
-        const sy =  rx * 2.0;
-        c.style.boxShadow = `${sx}px ${sy}px 22px rgba(0,0,0,0.28)`;
-
-        // Move the light hotspot on the card toward the orb
-        c.style.setProperty('--cx', (px*100) + '%');
-        c.style.setProperty('--cy', (py*100) + '%');
-        c.style.setProperty('--lit', (0.6 * strength).toFixed(3));
-      }
-
-      requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
+    document.getElementById('year').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
