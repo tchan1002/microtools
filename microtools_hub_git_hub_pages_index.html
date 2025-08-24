@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toby Chan — Microtools Hub</title>
+  <meta name="description" content="Hub of Toby Chan’s shipped microtools, interviews, and writing." />
+  <meta property="og:title" content="Toby Chan — Microtools Hub" />
+  <meta property="og:description" content="A page collecting finished tools and links." />
+  <meta property="og:type" content="website" />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    :root{
+      --bg:#0b0c10; --card:#111318; --muted:#9aa3ad; --text:#e9eef5; --accent:#7fd1ae; --link:#a7c5ff; --border:#1b1e26;
+      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:980px;margin:0 auto;padding:32px 18px 64px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2a2f3a,#1b1f28);display:grid;place-items:center;border:1px solid var(--border);box-shadow:var(--shadow)}
+    .logo span{font-weight:700}
+    .title h1{font-size:1.5rem;margin:0}
+    .title p{margin:4px 0 0;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+    .card h3{margin:2px 0 0;font-size:1.05rem}
+    .card p{margin:0;color:var(--muted);line-height:1.45}
+    .chip{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-size:.8rem}
+    .meta{display:flex;gap:10px;align-items:center;margin-top:6px}
+    .actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:#141821;color:var(--text)}
+    .btn:hover{background:#161b25}
+
+    section{margin:32px 0}
+    section h2{margin:0 0 12px}
+
+    .list ul{list-style:none;padding-left:0;margin:0;display:grid;gap:8px}
+    .list li{display:flex;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px}
+    .list small{color:var(--muted)}
+
+    footer{margin-top:42px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted)}
+
+    @media (max-width:520px){ .title p{display:none} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo"><span>TC</span></div>
+        <div class="title">
+          <h1>Toby Chan</h1>
+          <p>Finished tools, interviews, and writing.</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#tools">Tools</a>&nbsp;·&nbsp;
+        <a href="#interviews">Who’s On?</a>&nbsp;·&nbsp;
+        <a href="#writing">Writing</a>&nbsp;·&nbsp;
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <section id="tools">
+      <h2>Shipped Microtools</h2>
+      <div id="toolGrid" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="interviews">
+      <h2>“Who’s On?” — Conversations</h2>
+      <div class="list">
+        <ul>
+          <li>
+            <div>
+              <a href="https://open.substack.com/pub/who88" target="_blank" rel="noopener">Founder interview archive</a>
+              <div><small>Student founders, builders, and the future they’re making.</small></div>
+            </div>
+            <div><span class="chip">WHPK 88.5 FM</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="writing">
+      <h2>Writing</h2>
+      <div class="list">
+        <ul>
+          <li>
+            <div>
+              <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn posts</a>
+              <div><small>Build logs and takeaways from rapid prototyping.</small></div>
+            </div>
+            <div><span class="chip">Updates</span></div>
+          </li>
+          <li>
+            <div>
+              <a href="https://who88.substack.com" target="_blank" rel="noopener">Substack</a>
+              <div><small>Long-form: essays on product, serendipity, and student founder ecosystems.</small></div>
+            </div>
+            <div><span class="chip">Essays</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>I’m a UChicago senior building a portfolio of small, finished, revenue-generating tools — and assembling an A-team to go big.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:hello@example.com">Email</a>
+        <a class="btn" href="https://x.com/" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="btn" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+
+    <footer>
+      <small>© <span id="year"></span> Toby Chan. Built fast.</small>
+    </footer>
+  </div>
+
+  <script>
+    const tools = [
+      {
+        name: "Morphonyms",
+        tagline: "Word-ladder game about morphological intuition.",
+        url: "https://example.com/morphonyms",
+        repo: "https://github.com/yourname/morphonyms",
+        status: "Live",
+        note: "Built solo in 2 hours."
+      },
+      {
+        name: "Scotty (Email → Jekyll)",
+        tagline: "Email a post, get clean Markdown into your site’s repo.",
+        url: "https://email-to-jekyll.vercel.app",
+        repo: "https://github.com/yourname/email-to-jekyll",
+        status: "Live",
+        note: "Helped a friend publish faster."
+      },
+      {
+        name: "Actionable Insights",
+        tagline: "Paste a journal → get YAML + nudges toward long-term goals.",
+        url: "#",
+        repo: "https://github.com/yourname/actionable-insights",
+        status: "Building",
+        note: "MVP this week."
+      }
+    ];
+
+    const grid = document.getElementById('toolGrid');
+    tools.forEach(t => {
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.innerHTML = `
+        <div class="meta"><span class="chip">${t.status}</span></div>
+        <h3>${t.name}</h3>
+        <p>${t.tagline}</p>
+        ${t.note ? `<small class=\"muted\" style=\"color:var(--muted)\">${t.note}</small>` : ''}
+        <div class="actions">
+          ${t.url && t.url !== '#' ? `<a class="btn" href="${t.url}" target="_blank" rel="noopener">Open</a>` : ''}
+          ${t.repo ? `<a class="btn" href="${t.repo}" target="_blank" rel="noopener">Repo</a>` : ''}
+        </div>`;
+      grid.appendChild(el);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
